@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all non-draft posts, sorted by date descending
+const allPosts = await getCollection('posts', ({ data }) => {
+  return !data.draft;
+});
+
+const sortedPosts = allPosts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Separate public and investor posts
+const publicPosts = sortedPosts.filter(p => !p.data.investorOnly);
+const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
+---
+
+<BaseLayout title="Blog">
+  <h1>TinyFat Blog</h1>
+
+  <p><a href="https://tinyfat.com">&larr; Back to tinyfat.com</a></p>
+
+  <p>Updates on building TinyFat — managed AI agent hosting for persistent connections.</p>
+
+  <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✧</p>
+
+  <h2>Posts</h2>
+
+  {publicPosts.length > 0 ? (
+    <ul class="post-list">
+      {publicPosts.map((post) => (
+        <li>
+          <a href={`/posts/${post.id.replace(/\.md$/, '')}`}>{post.data.title}</a>
+          <br />
+          <time datetime={post.data.date}>
+            {new Date(post.data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          {post.data.description && <p>{post.data.description}</p>}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p><em>No posts yet. Check back soon.</em></p>
+  )}
+
+  {investorPosts.length > 0 && (
+    <>
+      <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✶</p>
+
+      <h2>Investor Updates <span class="investor-badge">Private</span></h2>
+
+      <ul class="post-list">
+        {investorPosts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id.replace(/\.md$/, '')}`}>{post.data.title}</a>
+            <span class="investor-badge">Investor Update</span>
+            <br />
+            <time datetime={post.data.date}>
+              {new Date(post.data.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✻</p>
+
+  <p>
+    <a href="https://tinyfat.com">tinyfat.com</a> |
+    <a href="https://docs.tinyfat.com">Documentation</a>
+  </p>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  date: string;
+  investorOnly?: boolean;
+}
+
+const { title, date, investorOnly } = Astro.props;
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={title}>
+  <p><a href="/">&larr; Back to blog</a> | <a href="https://tinyfat.com">tinyfat.com</a></p>
+
+  <h1>
+    {title}
+    {investorOnly && <span class="investor-badge">Investor Update</span>}
+  </h1>
+
+  <p class="post-meta">
+    <time datetime={date}>{formattedDate}</time>
+  </p>
+
+  <article>
+    <slot />
+  </article>
+
+  <p style="text-align: center; font-size: 3rem; margin: 2em 0;">✧</p>
+
+  <p><a href="/">&larr; Back to blog</a></p>
+</BaseLayout>

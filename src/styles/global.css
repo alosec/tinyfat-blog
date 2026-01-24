@@ -1,0 +1,201 @@
+/* TinyFat Blog - Global Styles (matches tinyfat.com aesthetic) */
+
+/* Minimal reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Use browser defaults for almost everything */
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: serif;
+}
+
+/* Page title breathing room */
+body > h1 {
+  margin-top: 3rem;  /* Desktop */
+}
+
+@media (max-width: 768px) {
+  body > h1 {
+    margin-top: 5rem;  /* Mobile */
+  }
+}
+
+/* Dark mode */
+html.dark {
+  background: #111;
+  color: #ddd;
+}
+
+html.dark a {
+  color: #6bf;
+}
+
+html.dark a:visited {
+  color: #b9f;
+}
+
+html.dark table,
+html.dark th,
+html.dark td {
+  border-color: #444;
+}
+
+html.dark th {
+  background: #222;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea,
+html.dark button {
+  background: #222;
+  color: #ddd;
+  border-color: #444;
+}
+
+html.dark code {
+  background: #222;
+}
+
+html.dark pre {
+  background: #222;
+  border-color: #444;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+
+html.dark .theme-toggle {
+  border-color: #444;
+  color: #ddd;
+}
+
+/* Links should be blue and underlined (browser default) */
+a {
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+
+/* Tables with visible borders */
+table {
+  border-collapse: collapse;
+}
+
+/* Code blocks */
+pre {
+  background: #f5f5f5;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+}
+
+code {
+  background: #f5f5f5;
+  padding: 0.1em 0.3em;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Form elements - use native styling */
+input, select, textarea, button {
+  font: inherit;
+}
+
+/* Utility classes for messages */
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+/* Blog-specific styles */
+.post-meta {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 1rem;
+}
+
+html.dark .post-meta {
+  color: #999;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+html.dark .post-list li {
+  border-bottom-color: #333;
+}
+
+.post-list time {
+  color: #666;
+  font-size: 0.85em;
+}
+
+html.dark .post-list time {
+  color: #999;
+}
+
+.investor-badge {
+  background: #f0e68c;
+  color: #333;
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.75em;
+  margin-left: 0.5em;
+}
+
+html.dark .investor-badge {
+  background: #8b8000;
+  color: #fff;
+}
+
+.locked-notice {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+html.dark .locked-notice {
+  background: #3d3d00;
+  border-color: #8b8000;
+}
