@@ -1,32 +1,57 @@
-/* TinyFat Blog - Global Styles (matches tinyfat.com aesthetic) */
+/* TinyFat Blog - Global Styles (matches tinyfat.com) */
 
 /* Minimal reset */
 * {
   box-sizing: border-box;
 }
 
-/* Use browser defaults for almost everything */
+/* Match main site typography */
 body {
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
-  font-family: serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+}
+
+/* Site title link */
+.site-title {
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-title:visited {
+  color: inherit;
+}
+
+/* Nav styling */
+.nav {
+  margin-bottom: 2rem;
 }
 
 /* Page title breathing room */
 body > h1 {
-  margin-top: 3rem;  /* Desktop */
+  margin-top: 3rem;
 }
 
 @media (max-width: 768px) {
   body > h1 {
-    margin-top: 5rem;  /* Mobile */
+    margin-top: 5rem;
   }
+}
+
+/* Light mode defaults */
+html {
+  background: #fff;
 }
 
 /* Dark mode */
 html.dark {
-  background: #111;
+  background: #1a1a1a;
   color: #ddd;
 }
 
@@ -36,6 +61,11 @@ html.dark a {
 
 html.dark a:visited {
   color: #b9f;
+}
+
+html.dark .site-title,
+html.dark .site-title:visited {
+  color: #ddd;
 }
 
 html.dark table,
@@ -71,7 +101,7 @@ html.dark pre {
   position: fixed;
   top: 0.5rem;
   left: 0.5rem;
-  background: white;
+  background: #fff;
   border: 1px solid #ccc;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
@@ -88,17 +118,18 @@ html.dark pre {
 }
 
 html.dark .theme-toggle {
+  background: #222;
   border-color: #444;
   color: #ddd;
 }
 
-/* Links should be blue and underlined (browser default) */
+/* Links - match main site */
 a {
-  color: blue;
+  color: #1a5ca0;
 }
 
 a:visited {
-  color: purple;
+  color: #6b4c8a;
 }
 
 /* Tables with visible borders */
@@ -136,6 +167,34 @@ input, select, textarea, button {
 
 .success {
   color: green;
+}
+
+/* Footer links */
+.footer-links {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+html.dark .footer-links {
+  color: #999;
+}
+
+/* Article prose spacing */
+article p {
+  margin: 1.25em 0;
+}
+
+article h2 {
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+article ul, article ol {
+  margin: 1.25em 0;
+}
+
+article li {
+  margin: 0.4em 0;
 }
 
 /* Blog-specific styles */

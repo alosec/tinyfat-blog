@@ -17,15 +17,13 @@ const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
 ---
 
 <BaseLayout title="Blog">
-  <h1>TinyFat Blog</h1>
-
-  <p><a href="https://tinyfat.com">&larr; Back to tinyfat.com</a></p>
+  <h2>Blog</h2>
 
   <p>Updates on building TinyFat — managed AI agent hosting for persistent connections.</p>
 
   <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✧</p>
 
-  <h2>Posts</h2>
+  <h3>Posts</h3>
 
   {publicPosts.length > 0 ? (
     <ul class="post-list">
@@ -52,7 +50,7 @@ const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
     <>
       <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✶</p>
 
-      <h2>Investor Updates <span class="investor-badge">Private</span></h2>
+      <h3>Investor Updates <span class="investor-badge">Private</span></h3>
 
       <ul class="post-list">
         {investorPosts.map((post) => (
@@ -72,11 +70,4 @@ const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
       </ul>
     </>
   )}
-
-  <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✻</p>
-
-  <p>
-    <a href="https://tinyfat.com">tinyfat.com</a> |
-    <a href="https://docs.tinyfat.com">Documentation</a>
-  </p>
 </BaseLayout>
