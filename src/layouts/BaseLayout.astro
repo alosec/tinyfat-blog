@@ -10,7 +10,7 @@ const { title } = Astro.props;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title} | TinyFat</title>
+  <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,31 +28,7 @@ const { title } = Astro.props;
 </head>
 <body>
   <button class="theme-toggle" id="theme-toggle">dark</button>
-
-  <h1><a href="https://tinyfat.com" class="site-title">TINY FAT AGENTS</a></h1>
-
-  <p class="nav">
-    <a href="https://tinyfat.com#about">About</a> ✧
-    <a href="https://tinyfat.com#how">How it works</a> ✶
-    <a href="https://tinyfat.com#pricing">Pricing</a> ✻
-    <a href="https://docs.tinyfat.com">Docs</a> ✧
-    <strong>Blog</strong> ✶
-    <a href="https://tinyfat.com/login">Sign in</a>
-  </p>
-
   <slot />
-
-  <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✽</p>
-
-  <p class="footer-links">
-    <a href="https://tinyfat.com/legal/terms">Terms</a> ·
-    <a href="https://tinyfat.com/legal/privacy">Privacy</a> ·
-    <a href="https://tinyfat.com/legal/acceptable-use">Acceptable Use</a> ·
-    <a href="https://tinyfat.com/contact">Contact</a>
-  </p>
-
-  <p>Built by <a href="https://alexgarcia.blog">Alex Garcia</a></p>
-
   <script is:inline>
     // Theme toggle functionality
     function initThemeToggle() {
@@ -75,21 +51,25 @@ const { title } = Astro.props;
       if (!btn) return;
 
       let lastScroll = 0;
-      const threshold = 50;
+      const threshold = 50; // pixels from top to show
 
       window.addEventListener('scroll', function() {
         const currentScroll = window.scrollY;
 
         if (currentScroll <= threshold) {
+          // At or near top - always show
           btn.classList.remove('hidden');
         } else if (currentScroll > lastScroll) {
+          // Scrolling down - hide
           btn.classList.add('hidden');
         }
+        // Scrolling up but not at top - stay hidden
 
         lastScroll = currentScroll;
       }, { passive: true });
     }
 
+    // Run on DOM ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
         initThemeToggle();

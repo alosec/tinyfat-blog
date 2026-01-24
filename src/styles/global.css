@@ -1,55 +1,40 @@
-/* TinyFat Blog - Global Styles (matches tinyfat.com) */
+/* Index Aesthetic - Global Styles */
 
 /* Minimal reset */
 * {
   box-sizing: border-box;
 }
 
-/* Match main site typography */
+/* Use browser defaults for almost everything */
 body {
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Headers use Libre Baskerville */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
-}
-
-/* Site title link */
-.site-title {
-  text-decoration: none;
-  color: inherit;
-}
-
-.site-title:visited {
-  color: inherit;
-}
-
-/* Nav styling */
-.nav {
-  margin-bottom: 2rem;
+  font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
 }
 
 /* Page title breathing room */
 body > h1 {
-  margin-top: 3rem;
+  margin-top: 3rem;  /* Desktop */
 }
 
 @media (max-width: 768px) {
   body > h1 {
-    margin-top: 5rem;
+    margin-top: 5rem;  /* Mobile */
   }
 }
 
-/* Light mode defaults */
+/* Light mode - white background */
 html {
   background: #fff;
 }
 
-/* Dark mode */
+/* Dark mode - dark gray */
 html.dark {
   background: #1a1a1a;
   color: #ddd;
@@ -61,11 +46,6 @@ html.dark a {
 
 html.dark a:visited {
   color: #b9f;
-}
-
-html.dark .site-title,
-html.dark .site-title:visited {
-  color: #ddd;
 }
 
 html.dark table,
@@ -101,7 +81,7 @@ html.dark pre {
   position: fixed;
   top: 0.5rem;
   left: 0.5rem;
-  background: #fff;
+  background: white;
   border: 1px solid #ccc;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
@@ -123,7 +103,7 @@ html.dark .theme-toggle {
   color: #ddd;
 }
 
-/* Links - match main site */
+/* Links */
 a {
   color: #1a5ca0;
 }
@@ -167,34 +147,6 @@ input, select, textarea, button {
 
 .success {
   color: green;
-}
-
-/* Footer links */
-.footer-links {
-  font-size: 0.85rem;
-  color: #666;
-}
-
-html.dark .footer-links {
-  color: #999;
-}
-
-/* Article prose spacing */
-article p {
-  margin: 1.25em 0;
-}
-
-article h2 {
-  margin-top: 2em;
-  margin-bottom: 0.75em;
-}
-
-article ul, article ol {
-  margin: 1.25em 0;
-}
-
-article li {
-  margin: 0.4em 0;
 }
 
 /* Blog-specific styles */
@@ -244,17 +196,4 @@ html.dark .post-list time {
 html.dark .investor-badge {
   background: #8b8000;
   color: #fff;
-}
-
-.locked-notice {
-  background: #fff3cd;
-  border: 1px solid #ffc107;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 4px;
-}
-
-html.dark .locked-notice {
-  background: #3d3d00;
-  border-color: #8b8000;
 }
