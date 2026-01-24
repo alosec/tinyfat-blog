@@ -2,12 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+const { user } = Astro.locals;
+
 // Get all non-draft posts, sorted by date descending
 const allPosts = await getCollection('posts', ({ data }) => {
   return !data.draft;
 });
 
-const sortedPosts = allPosts.sort((a, b) =>
+// Filter out investor-only posts for non-logged-in users
+const visiblePosts = allPosts.filter((post) => {
+  if (post.data.investorOnly && !user) {
+    return false;
+  }
+  return true;
+});
+
+const sortedPosts = visiblePosts.sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 ---
@@ -15,7 +25,17 @@ const sortedPosts = allPosts.sort((a, b) =>
 <BaseLayout title="Blog | Tiny Fat Agents">
   <h1>TINY FAT AGENTS</h1>
 
-  <p><a href="https://tinyfat.com">Home</a> ✧ <a href="https://tinyfat.com#how">How it works</a> ✶ <a href="https://tinyfat.com#pricing">Pricing</a> ✻ Blog ✧ <a href="https://tinyfat.com/login">Sign in</a></p>
+  <p>
+    <a href="https://tinyfat.com">Home</a> ✧
+    <a href="https://tinyfat.com#how">How it works</a> ✶
+    <a href="https://tinyfat.com#pricing">Pricing</a> ✻
+    Blog ✧
+    {user ? (
+      <a href="/api/auth/logout">Sign out</a>
+    ) : (
+      <a href="/login">Sign in</a>
+    )}
+  </p>
 
   <header class="page-header">
     <h2 id="blog">Blog</h2>
@@ -47,6 +67,12 @@ const sortedPosts = allPosts.sort((a, b) =>
     <p><em>No posts yet. Check back soon.</em></p>
   )}
 
+  {!user && (
+    <p class="login-prompt">
+      <a href="/login">Sign in</a> to see investor updates.
+    </p>
+  )}
+
   <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✽</p>
 
   <p style="font-size: 0.85rem; color: #666;">
@@ -58,3 +84,17 @@ const sortedPosts = allPosts.sort((a, b) =>
 
   <p>Built by <a href="https://alexgarcia.blog">Alex Garcia</a></p>
 </BaseLayout>
+
+<style>
+  .login-prompt {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 4px;
+  }
+
+  html.dark .login-prompt {
+    background: #222;
+  }
+</style>

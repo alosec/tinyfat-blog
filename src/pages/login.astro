@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { user } = Astro.locals;
+
+// If already logged in, redirect to home
+if (user) {
+  return Astro.redirect('/');
+}
+
+const error = Astro.url.searchParams.get('error');
+const redirectTo = Astro.url.searchParams.get('redirect') || '/';
+---
+
+<BaseLayout title="Sign In | Tiny Fat Agents Blog">
+  <h1>TINY FAT AGENTS</h1>
+
+  <p><a href="https://tinyfat.com">Home</a> ✧ <a href="https://tinyfat.com#how">How it works</a> ✶ <a href="https://tinyfat.com#pricing">Pricing</a> ✻ <a href="/">Blog</a></p>
+
+  <div class="login-container">
+    <h2>Sign In</h2>
+
+    <p>Sign in to access investor updates.</p>
+
+    {error && <p class="error">{decodeURIComponent(error)}</p>}
+
+    <form id="login-form" method="POST" action="/api/auth/login">
+      <input type="hidden" name="redirect" value={redirectTo} />
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autofocus />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <button type="submit">Sign In</button>
+    </form>
+
+    <p class="note">Don't have an account? <a href="https://tinyfat.com/signup">Sign up on tinyfat.com</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .login-container {
+    max-width: 400px;
+    margin: 4rem auto;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  html.dark input[type="email"],
+  html.dark input[type="password"] {
+    background: #222;
+    color: #ddd;
+    border-color: #444;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background: #333;
+  }
+
+  html.dark button[type="submit"] {
+    background: #333;
+  }
+
+  html.dark button[type="submit"]:hover {
+    background: #444;
+  }
+
+  .error {
+    color: #d32f2f;
+    background: #ffebee;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  html.dark .error {
+    background: #4a1c1c;
+    color: #ff8a80;
+  }
+
+  .note {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  html.dark .note {
+    color: #999;
+  }
+</style>

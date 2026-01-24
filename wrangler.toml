@@ -3,6 +3,7 @@ name = "tinyfat-blog"
 compatibility_date = "2024-12-01"
 pages_build_output_dir = "dist"
 
-# No secrets needed for static blog
-# If adding auth later, add:
-# - INVESTOR_PASSWORD: Simple password for investor posts
+# Environment variables set via Cloudflare dashboard or wrangler secret
+# Required for Supabase auth:
+# - PUBLIC_SUPABASE_URL
+# - PUBLIC_SUPABASE_ANON_KEY

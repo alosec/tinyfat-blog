@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { title, date, investorOnly } = Astro.props;
+const { user } = Astro.locals;
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -18,7 +19,17 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 <BaseLayout title={`${title} | Tiny Fat Agents`}>
   <h1>TINY FAT AGENTS</h1>
 
-  <p><a href="https://tinyfat.com">Home</a> ✧ <a href="https://tinyfat.com#how">How it works</a> ✶ <a href="https://tinyfat.com#pricing">Pricing</a> ✻ <a href="/">Blog</a> ✧ <a href="https://tinyfat.com/login">Sign in</a></p>
+  <p>
+    <a href="https://tinyfat.com">Home</a> ✧
+    <a href="https://tinyfat.com#how">How it works</a> ✶
+    <a href="https://tinyfat.com#pricing">Pricing</a> ✻
+    <a href="/">Blog</a> ✧
+    {user ? (
+      <a href="/api/auth/logout">Sign out</a>
+    ) : (
+      <a href="/login">Sign in</a>
+    )}
+  </p>
 
   <header class="post-header">
     <h2>

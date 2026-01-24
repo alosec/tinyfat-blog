@@ -2,15 +2,22 @@
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map((post) => ({
-    params: { slug: post.id.replace(/\.md$/, '') },
-    props: { post },
-  }));
+const { slug } = Astro.params;
+const { user } = Astro.locals;
+
+// Find the post
+const posts = await getCollection('posts');
+const post = posts.find((p) => p.id.replace(/\.md$/, '') === slug);
+
+if (!post) {
+  return Astro.redirect('/');
 }
 
-const { post } = Astro.props;
+// Gate investor-only posts behind auth
+if (post.data.investorOnly && !user) {
+  return Astro.redirect('/login?redirect=' + encodeURIComponent(Astro.url.pathname));
+}
+
 const { Content } = await render(post);
 ---
 
