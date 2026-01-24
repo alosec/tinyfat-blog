@@ -10,10 +10,6 @@ const allPosts = await getCollection('posts', ({ data }) => {
 const sortedPosts = allPosts.sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
-
-// Separate public and investor posts
-const publicPosts = sortedPosts.filter(p => !p.data.investorOnly);
-const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
 ---
 
 <BaseLayout title="Blog | Tiny Fat Agents">
@@ -21,20 +17,21 @@ const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
 
   <p><a href="https://tinyfat.com">Home</a> ✧ <a href="https://tinyfat.com#how">How it works</a> ✶ <a href="https://tinyfat.com#pricing">Pricing</a> ✻ Blog ✧ <a href="https://tinyfat.com/login">Sign in</a></p>
 
-  <h2 id="blog" style="margin-top: 5rem;">Blog</h2>
+  <header class="page-header">
+    <h2 id="blog">Blog</h2>
+    <p class="page-description">Updates on building TinyFat — managed AI agent hosting for persistent connections.</p>
+  </header>
 
-  <p>Updates on building TinyFat — managed AI agent hosting for persistent connections.</p>
-
-  <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✧</p>
+  <p style="text-align: center; font-size: 3rem; margin: 1.5em 0;">✧</p>
 
   <h3>Posts</h3>
 
-  {publicPosts.length > 0 ? (
+  {sortedPosts.length > 0 ? (
     <ul class="post-list">
-      {publicPosts.map((post) => (
+      {sortedPosts.map((post) => (
         <li>
           <a href={`/posts/${post.id.replace(/\.md$/, '')}`}>{post.data.title}</a>
-          <br />
+          {post.data.investorOnly && <span class="investor-badge">Investor Update</span>}
           <time datetime={post.data.date}>
             {new Date(post.data.date).toLocaleDateString('en-US', {
               year: 'numeric',
@@ -48,31 +45,6 @@ const investorPosts = sortedPosts.filter(p => p.data.investorOnly);
     </ul>
   ) : (
     <p><em>No posts yet. Check back soon.</em></p>
-  )}
-
-  {investorPosts.length > 0 && (
-    <>
-      <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✶</p>
-
-      <h3>Investor Updates <span class="investor-badge">Private</span></h3>
-
-      <ul class="post-list">
-        {investorPosts.map((post) => (
-          <li>
-            <a href={`/posts/${post.id.replace(/\.md$/, '')}`}>{post.data.title}</a>
-            <span class="investor-badge">Investor Update</span>
-            <br />
-            <time datetime={post.data.date}>
-              {new Date(post.data.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-          </li>
-        ))}
-      </ul>
-    </>
   )}
 
   <p style="text-align: center; font-size: 3rem; margin: 1em 0;">✽</p>

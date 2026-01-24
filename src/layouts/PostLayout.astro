@@ -20,14 +20,16 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
   <p><a href="https://tinyfat.com">Home</a> ✧ <a href="https://tinyfat.com#how">How it works</a> ✶ <a href="https://tinyfat.com#pricing">Pricing</a> ✻ <a href="/">Blog</a> ✧ <a href="https://tinyfat.com/login">Sign in</a></p>
 
-  <h2 style="margin-top: 5rem;">
-    {title}
-    {investorOnly && <span class="investor-badge">Investor Update</span>}
-  </h2>
+  <header class="post-header">
+    <h2>
+      {title}
+      {investorOnly && <span class="investor-badge">Investor Update</span>}
+    </h2>
 
-  <p class="post-meta">
-    <time datetime={date}>{formattedDate}</time>
-  </p>
+    <p class="post-meta">
+      <time datetime={date}>{formattedDate}</time>
+    </p>
+  </header>
 
   <article>
     <slot />
