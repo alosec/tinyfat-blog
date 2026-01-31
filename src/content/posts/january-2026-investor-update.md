@@ -17,21 +17,25 @@ The agent doesn't know it's in a sandbox. It just sees a Linux environment with 
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────┐
-│  Cloudflare Container                   │
-│  ┌───────────────────────────────────┐  │
-│  │  step-mom daemon                  │  │
-│  │  - Warm session                   │  │
-│  │  - WebSocket endpoint             │  │
-│  └───────────────────────────────────┘  │
-│                                         │
-│  /data (R2 mount)                       │
-│  - MEMORY.md                            │
-│  - sessions/                            │
-│  - outbox/                              │
-└─────────────────────────────────────────┘
-```
+<pre class="mermaid">
+flowchart TB
+  subgraph Container[Cloudflare Container]
+    direction TB
+    Daemon[step-mom daemon]
+    Daemon --- Session[Warm session]
+    Daemon --- WS[WebSocket endpoint]
+
+    subgraph Storage["/data (R2 mount)"]
+      Memory[MEMORY.md]
+      Sessions[sessions/]
+      Outbox[outbox/]
+    end
+  end
+
+  WebChat[Web Chat] --> Daemon
+  Email[Email] --> Daemon
+  Daemon <--> Storage
+</pre>
 
 A daemon stays warm inside the container. Web chat connects via WebSocket. Email triggers async runs. Both hit the same agent with the same memory.
 

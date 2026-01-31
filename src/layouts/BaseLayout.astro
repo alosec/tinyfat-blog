@@ -80,6 +80,18 @@ const { title } = Astro.props;
       initScrollBehavior();
     }
   </script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.documentElement.classList.contains('dark') ? 'dark' : 'neutral',
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis'
+      }
+    });
+  </script>
 </body>
 </html>
 
