@@ -3,7 +3,7 @@ name = "tinyfat-blog"
 compatibility_date = "2024-12-01"
 pages_build_output_dir = "dist"
 
-# Environment variables set via Cloudflare dashboard or wrangler secret
-# Required for Supabase auth:
-# - PUBLIC_SUPABASE_URL
-# - PUBLIC_SUPABASE_ANON_KEY
+# Public environment variables (available at runtime)
+[vars]
+PUBLIC_SUPABASE_URL = "https://imtvwbmqiqygxtpdbaxz.supabase.co"
+PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImltdHZ3Ym1xaXF5Z3h0cGRiYXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NDE3MzEsImV4cCI6MjA4MTUxNzczMX0.RVA8zZt0TC8Q7LqMfzF5nNmCSKfuUxnYJF_92cRvSKE"

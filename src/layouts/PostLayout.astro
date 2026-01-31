@@ -32,10 +32,8 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   </p>
 
   <header class="post-header">
-    <h2>
-      {title}
-      {investorOnly && <span class="investor-badge">Investor Update</span>}
-    </h2>
+    <h2>{title}</h2>
+    {investorOnly && <span class="investor-badge">Investor Update</span>}
 
     <p class="post-meta">
       <time datetime={date}>{formattedDate}</time>

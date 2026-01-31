@@ -251,6 +251,11 @@ html.dark .page-description {
 
 .post-header h2 {
   margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.post-header .investor-badge {
+  margin-left: 0;
   margin-bottom: 0.75rem;
 }
 
@@ -324,6 +329,8 @@ html.dark .post-list p {
   border-radius: 3px;
   font-size: 0.75em;
   margin-left: 0.5em;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 html.dark .investor-badge {
