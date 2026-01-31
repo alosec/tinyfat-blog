@@ -222,6 +222,11 @@ html.dark article blockquote {
   border-left-color: #555;
 }
 
+article hr {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
 /* Page header (index page) */
 .page-header {
   margin-top: 4rem;
