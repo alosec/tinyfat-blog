@@ -7,7 +7,7 @@ investorOnly: false
 
 Telegram is now a supported channel. Send your agent a message from Telegram and get a response — same brain, same memory, different interface.
 
-This is an alpha. Reach out to hello@tinyfat.com to get set up.
+This is an alpha.
 
 ---
 
